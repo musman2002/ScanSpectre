@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressList.cs" />
+    <Compile Include="AddressScanner.cs" />
     <Compile Include="ScanSpectre.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -14,5 +14,23 @@ namespace ScanSpectre
         {
             InitializeComponent();
         }
+
+        private void btnStartScan_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            btnStartScan.Enabled = false;
+
+            AddressScanner scanner = new AddressScanner(
+                txtIp.Text,
+                int.Parse(txtStartPort.Text),
+                int.Parse(txtEndPort.Text),
+                int.Parse(txtTimeout.Text),
+                dataGridView1,
+                txtCurrentPort,
+                this,
+                btnStartScan);
+
+            scanner.StartScan();
+        }
     }
 }
