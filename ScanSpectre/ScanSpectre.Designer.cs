@@ -9,6 +9,7 @@
         private System.Windows.Forms.NumericUpDown txtTimeout;
         private System.Windows.Forms.TextBox txtCurrentPort;
         private System.Windows.Forms.Button btnStartScan;
+        private System.Windows.Forms.Button btnSaveToFile;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblIp;
         private System.Windows.Forms.Label lblStartPort;
@@ -34,6 +35,7 @@
             this.txtTimeout = new System.Windows.Forms.NumericUpDown();
             this.txtCurrentPort = new System.Windows.Forms.TextBox();
             this.btnStartScan = new System.Windows.Forms.Button();
+            this.btnSaveToFile = new System.Windows.Forms.Button();  // Added button for saving
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblIp = new System.Windows.Forms.Label();
             this.lblStartPort = new System.Windows.Forms.Label();
@@ -98,6 +100,15 @@
             this.btnStartScan.UseVisualStyleBackColor = true;
             this.btnStartScan.Click += new System.EventHandler(this.btnStartScan_Click);
 
+            // btnSaveToFile
+            this.btnSaveToFile.Location = new System.Drawing.Point(15, 450);  // Position below the DataGridView
+            this.btnSaveToFile.Name = "btnSaveToFile";
+            this.btnSaveToFile.Size = new System.Drawing.Size(245, 35);
+            this.btnSaveToFile.TabIndex = 7;
+            this.btnSaveToFile.Text = "Save to File";
+            this.btnSaveToFile.UseVisualStyleBackColor = true;
+            this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
+
             // dataGridView1
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -105,7 +116,7 @@
             new System.Windows.Forms.DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Width = 150 }});
             this.dataGridView1.Location = new System.Drawing.Point(15, 250);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(245, 200);
+            this.dataGridView1.Size = new System.Drawing.Size(245, 180);
             this.dataGridView1.TabIndex = 6;
 
             // lblIp
@@ -113,7 +124,7 @@
             this.lblIp.Location = new System.Drawing.Point(15, 28);
             this.lblIp.Name = "lblIp";
             this.lblIp.Size = new System.Drawing.Size(75, 15);
-            this.lblIp.TabIndex = 7;
+            this.lblIp.TabIndex = 8;
             this.lblIp.Text = "IP/Domain:";
 
             // lblStartPort
@@ -121,7 +132,7 @@
             this.lblStartPort.Location = new System.Drawing.Point(15, 63);
             this.lblStartPort.Name = "lblStartPort";
             this.lblStartPort.Size = new System.Drawing.Size(58, 15);
-            this.lblStartPort.TabIndex = 8;
+            this.lblStartPort.TabIndex = 9;
             this.lblStartPort.Text = "Start Port:";
 
             // lblEndPort
@@ -129,7 +140,7 @@
             this.lblEndPort.Location = new System.Drawing.Point(15, 98);
             this.lblEndPort.Name = "lblEndPort";
             this.lblEndPort.Size = new System.Drawing.Size(54, 15);
-            this.lblEndPort.TabIndex = 9;
+            this.lblEndPort.TabIndex = 10;
             this.lblEndPort.Text = "End Port:";
 
             // lblTimeout
@@ -137,7 +148,7 @@
             this.lblTimeout.Location = new System.Drawing.Point(15, 133);
             this.lblTimeout.Name = "lblTimeout";
             this.lblTimeout.Size = new System.Drawing.Size(81, 15);
-            this.lblTimeout.TabIndex = 10;
+            this.lblTimeout.TabIndex = 11;
             this.lblTimeout.Text = "Timeout (ms):";
 
             // lblCurrentPort
@@ -145,7 +156,7 @@
             this.lblCurrentPort.Location = new System.Drawing.Point(15, 168);
             this.lblCurrentPort.Name = "lblCurrentPort";
             this.lblCurrentPort.Size = new System.Drawing.Size(75, 15);
-            this.lblCurrentPort.TabIndex = 11;
+            this.lblCurrentPort.TabIndex = 12;
             this.lblCurrentPort.Text = "Current Port:";
 
             // grpSettings
@@ -162,14 +173,15 @@
             this.grpSettings.Location = new System.Drawing.Point(12, 12);
             this.grpSettings.Name = "grpSettings";
             this.grpSettings.Size = new System.Drawing.Size(270, 220);
-            this.grpSettings.TabIndex = 12;
+            this.grpSettings.TabIndex = 13;
             this.grpSettings.TabStop = false;
             this.grpSettings.Text = "Scan Settings";
 
             // ScanSpectre (Main Form)
-            this.ClientSize = new System.Drawing.Size(300, 480);
+            this.ClientSize = new System.Drawing.Size(300, 500); // Adjusted to fit Save button
             this.Controls.Add(this.grpSettings);
             this.Controls.Add(this.btnStartScan);
+            this.Controls.Add(this.btnSaveToFile);  // Added Save to File button to form
             this.Controls.Add(this.dataGridView1);
             this.Name = "ScanSpectre";
             this.Text = "ScanSpectre - TCP Port Scanner";

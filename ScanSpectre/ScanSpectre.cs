@@ -10,6 +10,8 @@ namespace ScanSpectre
 {
     public partial class ScanSpectre : Form
     {
+        private AddressScanner scanner;
+
         public ScanSpectre()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace ScanSpectre
             dataGridView1.Rows.Clear();
             btnStartScan.Enabled = false;
 
-            AddressScanner scanner = new AddressScanner(
+            scanner = new AddressScanner(
                 txtIp.Text,
                 int.Parse(txtStartPort.Text),
                 int.Parse(txtEndPort.Text),
@@ -31,6 +33,24 @@ namespace ScanSpectre
                 btnStartScan);
 
             scanner.StartScan();
+        }
+
+        private void btnSaveToFile_Click(object sender, EventArgs e)
+        {
+            if (scanner == null)
+            {
+                MessageBox.Show("No scan results to save. Please run a scan first.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    scanner.SaveResultsToFile(saveFileDialog.FileName);
+                }
+            }
         }
     }
 }
