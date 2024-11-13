@@ -55,4 +55,3 @@ jobs:
         asset_path: C:\Publish\release.zip
         asset_name: release.zip
         asset_content_type: application/zip
-        asset_content_type: application/zip
