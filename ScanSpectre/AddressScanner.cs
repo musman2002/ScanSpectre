@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,11 +37,14 @@ namespace ScanSpectre
                 txtCurrentPort.Invoke((Action)(() => txtCurrentPort.Text = port.ToString()));
 
                 bool isOpen = await ScanPortAsync(ipAddress, port, timeout);
+                string banner = isOpen ? await GrabBannerAsync(ipAddress, port) : "Closed";
+
                 dataGridView.Invoke((Action)(() =>
                 {
                     int rowIndex = dataGridView.Rows.Add();
                     dataGridView.Rows[rowIndex].Cells[0].Value = port;
                     dataGridView.Rows[rowIndex].Cells[1].Value = isOpen ? "Open" : "Closed";
+                    dataGridView.Rows[rowIndex].Cells[2].Value = banner;
                 }));
             }
 
@@ -62,6 +66,46 @@ namespace ScanSpectre
             catch
             {
                 return false;
+            }
+        }
+
+        private async Task<string> GrabBannerAsync(string ipAddress, int port)
+        {
+            try
+            {
+                using (var client = new TcpClient())
+                {
+                    await client.ConnectAsync(ipAddress, port);
+                    using (NetworkStream stream = client.GetStream())
+                    {
+                        stream.ReadTimeout = timeout;
+
+                        // Send a basic request (for HTTP, use GET).
+                        byte[] request = Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost: " + ipAddress + "\r\n\r\n");
+                        await stream.WriteAsync(request, 0, request.Length);
+
+                        // Read the response (banner).
+                        byte[] buffer = new byte[1024];
+                        int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+
+                        string response = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                        string[] lines = response.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+                        // Simple check to categorize the service
+                        if (response.Contains("HTTP"))
+                            return "HTTP Server - " + lines[0];
+                        if (response.ToUpper().Contains("FTP"))
+                            return "FTP Server - Banner Detected";
+                        if (response.Contains("SSH"))
+                            return "SSH Server - Banner Detected";
+
+                        return lines.Length > 0 ? lines[0] : "Unknown Service";
+                    }
+                }
+            }
+            catch
+            {
+                return "Banner Not Available";
             }
         }
     }

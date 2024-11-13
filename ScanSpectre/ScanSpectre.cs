@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Collections.Concurrent;
 
 namespace ScanSpectre
 {
@@ -13,6 +8,24 @@ namespace ScanSpectre
         public ScanSpectre()
         {
             InitializeComponent();
+            txtIp.GotFocus += RemoveText;
+            txtIp.LostFocus += AddText;
+        }
+
+        private void RemoveText(object sender, EventArgs e)
+        {
+            if (txtIp.Text == "Enter IP/Domain")
+            {
+                txtIp.Text = "";
+            }
+        }
+
+        private void AddText(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtIp.Text))
+            {
+                txtIp.Text = "Enter IP/Domain";
+            }
         }
 
         private void btnStartScan_Click(object sender, EventArgs e)
@@ -22,9 +35,9 @@ namespace ScanSpectre
 
             AddressScanner scanner = new AddressScanner(
                 txtIp.Text,
-                int.Parse(txtStartPort.Text),
-                int.Parse(txtEndPort.Text),
-                int.Parse(txtTimeout.Text),
+                (int)txtStartPort.Value,
+                (int)txtEndPort.Value,
+                (int)txtTimeout.Value,
                 dataGridView1,
                 txtCurrentPort,
                 this,
