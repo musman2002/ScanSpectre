@@ -60,5 +60,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: C:\Publish\release.zip
-        asset_name: SharpRISCV.zip
+        asset_name: ScanSpectre.zip
         asset_content_type: application/zip
