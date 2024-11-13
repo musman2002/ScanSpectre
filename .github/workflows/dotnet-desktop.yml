@@ -20,13 +20,13 @@ jobs:
       run: dir
 
     - name: Restore NuGet packages
-      run: nuget restore ScanSpectre.sln
+      run: nuget restore D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln
 
     - name: Build solution
       run: |
         $OutputDir = "C:\Publish"
         mkdir $OutputDir
-        msbuild /p:Configuration=Release ScanSpectre.sln/p:OutputPath=$OutputDir
+        msbuild /p:Configuration=Release D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln /p:OutputPath=$OutputDir
 
     - name: Create a ZIP archive of the published files
       run: |
