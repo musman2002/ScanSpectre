@@ -1,5 +1,9 @@
 name: Build and Publish .NET Framework 4.8 Release
 
+permissions:
+  contents: write
+  discussions: write
+
 on:
   push:
     branches:
@@ -14,54 +18,47 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up MSBuild
-      uses: microsoft/setup-msbuild@v1
-
-    - name: Navigate to Workspace
-      run: cd $GITHUB_WORKSPACE
-
-    - name: Create Build Directory
-      run: mkdir _build
+      uses: microsoft/setup-msbuild@v1   
 
     - name: Restore NuGet packages
-      run: nuget restore ScanSpectre.sln
+      run: nuget restore D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln
 
     - name: Build solution
       run: |
         $OutputDir = "C:\Publish"
         mkdir $OutputDir
-        msbuild /p:Configuration=Release ScanSpectre.sln/p:OutputPath=$OutputDir
+        msbuild /p:Configuration=Release D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln /p:OutputPath=$OutputDir
 
     - name: Create a ZIP archive of the published files
       run: |
         Compress-Archive -Path C:\Publish\* -DestinationPath C:\Publish\release.zip
+        
+    - name: Create Git tag
+      id: set_tag
+      run: |
+        $tag = "v$(date +'%Y%m%d%H%M%S')"
+        git tag $tag
+        git push origin $tag
+        echo "TAG=$tag" >> $env:GITHUB_ENV
 
-    - name: Upload release artifact
-      uses: actions/upload-artifact@v3
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: release-$(date +'%Y%m%d%H%M%S')
-        path: C:\Publish\release.zip
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Create GitHub release
-      uses: gh actions/create-release@v1
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        body: 'Release description here.'
+        tag_name: ${{ env.TAG }}
+        release_name: Release ${{ env.TAG }}
         draft: false
         prerelease: false
 
-    - name: Upload release asset
-      uses: gh actions/upload-release-asset@v1
+    - name: Update release asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        release_id: ${{ steps.create_release.outputs.id }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: C:\Publish\release.zip
-        asset_name: release.zip
+        asset_name: SharpRISCV.zip
         asset_content_type: application/zip
