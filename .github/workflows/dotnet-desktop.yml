@@ -19,9 +19,6 @@ jobs:
 
     - name: Set up MSBuild
       uses: microsoft/setup-msbuild@v1   
-    
-    - name: Restore NuGet packages
-      run: dir
 
     - name: Restore NuGet packages
       run: nuget restore D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln
@@ -35,17 +32,18 @@ jobs:
     - name: Create a ZIP archive of the published files
       run: |
         Compress-Archive -Path C:\Publish\* -DestinationPath C:\Publish\release.zip
+        
+    - name: Create Git tag
+      run: |
+        $tag = "v$(date +'%Y%m%d%H%M%S')"
+        git tag $tag
+        git push origin $tag
 
     - name: Upload release artifact
       uses: actions/upload-artifact@v3
       with:
         name: release-$(date +'%Y%m%d%H%M%S')
         path: C:\Publish\release.zip
-    - name: Create Git tag
-      run: |
-        $tag = "v$(date +'%Y%m%d%H%M%S')"
-        git tag $tag
-        git push origin $tag
         
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
