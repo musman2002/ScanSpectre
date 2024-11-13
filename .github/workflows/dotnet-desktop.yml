@@ -34,10 +34,12 @@ jobs:
         Compress-Archive -Path C:\Publish\* -DestinationPath C:\Publish\release.zip
         
     - name: Create Git tag
+      id: set_tag
       run: |
         $tag = "v$(date +'%Y%m%d%H%M%S')"
         git tag $tag
         git push origin $tag
+        echo "TAG=$tag" >> $GITHUB_ENV
 
     - name: Create release
       id: create_release
@@ -45,8 +47,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ env.TAG }}
+        release_name: Release ${{ env.TAG }}
         draft: false
         prerelease: false
 
