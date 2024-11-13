@@ -17,7 +17,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1   
     
     - name: Restore NuGet packages
-      run: tree
+      run: dir
 
     - name: Restore NuGet packages
       run: nuget restore ScanSpectre.sln
