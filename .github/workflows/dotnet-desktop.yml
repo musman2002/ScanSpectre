@@ -1,0 +1,72 @@
+name: Build and Publish .NET Framework 4.8 Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up MSBuild
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 4.8 
+
+    - name: Install Visual Studio Build Tools (if needed)
+      run: |
+        choco install visualstudio2019buildtools --version=16.11.0 --package-parameters "--add-to-path"
+        refreshenv
+
+    - name: Restore NuGet packages
+      run: nuget restore ScanSpectre.sln
+
+    - name: Build solution
+      run: msbuild /p:Configuration=Release ScanSpectre.sln
+
+    - name: Publish Release Artifacts
+      run: |
+        # Define output directory
+        $OutputDir = "C:\Publish"
+        mkdir $OutputDir
+        msbuild /p:Configuration=Release /p:OutputPath=$OutputDir ScanSpectre.sln
+
+    - name: Create a ZIP archive of the published files
+      run: |
+        Compress-Archive -Path C:\Publish\* -DestinationPath C:\Publish\release.zip
+
+    - name: Upload release artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-$(date +'%Y%m%d%H%M%S')
+        path: C:\Publish\release.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create GitHub release
+      uses: gh actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: 'Release description here.'
+        draft: false
+        prerelease: false
+
+    - name: Upload release asset
+      uses: gh actions/upload-release-asset@v1
+      with:
+        release_id: ${{ steps.create_release.outputs.id }}
+        asset_path: C:\Publish\release.zip
+        asset_name: release.zip
+        asset_content_type: application/zip
