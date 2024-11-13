@@ -7,34 +7,29 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up MSBuild
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 4.8 
+      uses: microsoft/setup-msbuild@v1
 
-    - name: Install Visual Studio Build Tools (if needed)
-      run: |
-        choco install visualstudio2019buildtools --version=16.11.0 --package-parameters "--add-to-path"
-        refreshenv
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE
+
+    - name: Create Build Directory
+      run: mkdir _build
 
     - name: Restore NuGet packages
       run: nuget restore ScanSpectre.sln
 
     - name: Build solution
-      run: msbuild /p:Configuration=Release ScanSpectre.sln
-
-    - name: Publish Release Artifacts
       run: |
-        # Define output directory
         $OutputDir = "C:\Publish"
         mkdir $OutputDir
-        msbuild /p:Configuration=Release /p:OutputPath=$OutputDir ScanSpectre.sln
+        msbuild /p:Configuration=Release ScanSpectre.sln/p:OutputPath=$OutputDir
 
     - name: Create a ZIP archive of the published files
       run: |
