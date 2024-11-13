@@ -41,6 +41,11 @@ jobs:
       with:
         name: release-$(date +'%Y%m%d%H%M%S')
         path: C:\Publish\release.zip
+    - name: Create Git tag
+      run: |
+        $tag = "v$(date +'%Y%m%d%H%M%S')"
+        git tag $tag
+        git push origin $tag
         
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
