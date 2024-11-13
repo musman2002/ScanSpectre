@@ -1,5 +1,9 @@
 name: Build and Publish .NET Framework 4.8 Release
 
+permissions:
+  contents: write
+  discussions: write
+
 on:
   push:
     branches:
@@ -37,21 +41,10 @@ jobs:
       with:
         name: release-$(date +'%Y%m%d%H%M%S')
         path: C:\Publish\release.zip
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Upload release asset
-      uses: actions/upload-release-asset@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: C:\Publish\release.zip
-        asset_name: release.zip
-        asset_content_type: application/zip
+        files: C:\Publish\release.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
