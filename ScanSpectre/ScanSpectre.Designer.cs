@@ -112,11 +112,13 @@
             // dataGridView1
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            new System.Windows.Forms.DataGridViewTextBoxColumn() { Name = "Port", HeaderText = "Port", Width = 75 },
-            new System.Windows.Forms.DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Width = 150 }});
+                new System.Windows.Forms.DataGridViewTextBoxColumn() { Name = "Port", HeaderText = "Port", Width = 75 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Width = 75 },
+                new System.Windows.Forms.DataGridViewTextBoxColumn() { Name = "Service", HeaderText = "Service/Banner", Width = 200 }
+            });
             this.dataGridView1.Location = new System.Drawing.Point(15, 250);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(245, 180);
+            this.dataGridView1.Size = new System.Drawing.Size(400, 200);
             this.dataGridView1.TabIndex = 6;
 
             // lblIp
@@ -178,7 +180,7 @@
             this.grpSettings.Text = "Scan Settings";
 
             // ScanSpectre (Main Form)
-            this.ClientSize = new System.Drawing.Size(300, 500); // Adjusted to fit Save button
+            this.ClientSize = new System.Drawing.Size(450, 500);
             this.Controls.Add(this.grpSettings);
             this.Controls.Add(this.btnStartScan);
             this.Controls.Add(this.btnSaveToFile);  // Added Save to File button to form
