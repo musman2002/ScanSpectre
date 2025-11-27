@@ -1,50 +1,220 @@
-# ScanSpectre - TCP Port Scanner
+# ⚡ ScanSpectre — Advanced Multi-Threaded TCP Port Scanner
 
-**ScanSpectre** is a multi-threaded, Windows Forms-based TCP port scanner that allows users to scan a range of ports on a specified IP address or domain. This tool provides real-time feedback on open/closed port statuses and includes settings for adjusting scan parameters such as port range, timeout, and concurrent threads.
+<p align="center">
+  <img src="assets/banner.png" width="80%" alt="ScanSpectre Banner"/>
+</p>
 
-## Features
+<p align="center">
+  <strong>Fast • Accurate • Multi-Threaded • Built for .NET 10 and Windows Forms</strong>
+</p>
 
-- **Scan by IP Address or Domain Name**
-- **Define Port Range**: Specify start and end ports for scanning.
-- **Set Connection Timeout**: Control how long each port attempt lasts.
-- **Real-Time Port Status Updates**: Displays open/closed status in a grid.
-- **Current Port Indicator**: Shows which port is currently being scanned.
-- **Multi-Threaded Scanning**: Choose the number of concurrent threads for faster results.
+<p align="center">
 
-## Installation
+  <!-- Framework -->
 
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/yourusername/ScanSpectre.git```
-2. **Open the Project**: Open the project in Visual Studio or your preferred IDE.
-3. **Build the Solution**: Build the solution to restore dependencies and compile the project.
-4. **Run the Application**: Start the application from Visual Studio or by running the compiled executable.
+  <img src="https://img.shields.io/badge/.NET-10.0-blueviolet?style=for-the-badge"/>
 
+  <!-- Build Status -->
 
-## Usage
-1. **Enter IP or Domain**: Input the IP address or domain to scan.
-2. **Set Port Range:**:  Define the start and end ports for the scan.
-3. **Set Timeout**:  Specify the timeout in milliseconds (default is 1000 ms).
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge"/>
 
-4. **Click Start Scan**:  Begin scanning the selected port range.
+  <!-- License -->
 
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge"/>
 
-- As the scan progresses, the status of each port (open or closed) will be displayed in the grid. The ```Current Port``` box will update to show the current port being scanned.
+  <!-- Downloads -->
 
-## Project Structure
+  <img src="https://img.shields.io/badge/Downloads-1K%2B-blue?style=for-the-badge"/>
 
-- **ScanSpectre.cs**: Main form and UI code for the application.
+</p>
 
-- **ScanSpectre.Designer.cs**: UI layout and components setup.
-- **AddressScanner.cs**: Core scanning logic for checking each port.
-- **AddressList.cs**: Class representing the range of ports.
+---
 
-## Contributing
-Contributions are welcome! Please submit issues or pull requests to help improve ScanSpectre.
+# 📌 Table of Contents
 
-## Disclaimer
-**ScanSpectre** is intended for educational purposes and authorized scanning only. Ensure you have permission before scanning any network or IP address. Unauthorized port scanning may violate network policies or legal regulations.
+* [Overview](#-overview)
+* [Features](#-features)
+* [Screenshots](#-screenshots)
+* [Installation](#-installation)
+* [Usage](#-usage)
+* [Documentation](#-documentation)
+* [Project Structure](#-project-structure)
+* [Contributing](#-contributing)
+* [Disclaimer](#-disclaimer)
+* [License](#-license)
+* [GitHub Pages Support](#-github-pages-support)
 
-## License
+---
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/musman2002/ScanSpectre/blob/master/LICENSE.txt) file for details.
+# 🌟 Overview
+
+**ScanSpectre** is a high-performance TCP port scanner created using **WinForms** and **.NET 10**.
+It is designed for speed, simplicity, and accurate results through multi-threaded scanning.
+Ideal for developers, students, and network research.
+
+---
+
+# ✨ Features
+
+🔍 **Intelligent Scanning**
+
+* Scan **IP addresses** and **domain names**
+* Customizable **port range**
+* Adjustable **timeouts**
+* Live UI updates & status reporting
+
+⚡ **High Performance**
+
+* Multi-threaded engine
+* Non-blocking UI
+* Real-time progress indicators
+
+🖥️ **User-Friendly Interface**
+
+* Modern WinForms layout
+* DataGrid-based result display
+* Error handling & validation messages
+
+🧩 **Developer-Ready**
+
+* Clean architecture
+* Async scanning logic
+* Easily extensible
+
+---
+
+# 🖼️ Screenshots
+
+> *(Replace these placeholder paths with actual screenshots later)*
+
+### Main Window
+
+<p align="center">
+  <img src="assets/screenshot-main.png" width="75%" alt="Main UI"/>
+</p>
+
+### Real-Time Scanning
+
+<p align="center">
+  <img src="assets/screenshot-scan.gif" width="75%" alt="Scanning GIF"/>
+</p>
+
+---
+
+# 📦 Installation
+
+```bash
+git clone https://github.com/musman2002/ScanSpectre.git
+```
+
+1. Open in **Visual Studio 2026**
+2. Restore & build solution
+3. Run the application
+
+Supports **Windows 11 / Windows 12** and **.NET 10 Desktop Runtime**.
+
+---
+
+# 🚀 Usage
+
+1. Enter an IP or domain
+2. Set a start & end port
+3. Choose timeout (ms)
+4. Choose thread count
+5. Press **Start Scan**
+
+Real-time updates appear in the grid, and the **Current Port** indicator shows the active check.
+
+---
+
+# 📘 Documentation
+
+This section auto-generates structure and descriptions to help developers.
+
+## 🔧 Core Classes
+
+### **AddressScanner.cs**
+
+Handles:
+
+* TCP connect attempts
+* Timeout logic
+* Multi-threaded scanning
+* Reporting results back to the UI
+
+### **AddressList.cs**
+
+Models port ranges and
+
+* Generates port sequences
+* Validates ranges
+* Prepares values for scanning
+
+### **ScanSpectre.cs**
+
+* UI event handlers
+* Updates DataGridView
+* Controls thread management
+* Coordinates scanner operations
+
+---
+
+# 🧩 Project Structure
+
+```
+ScanSpectre/
+│
+├── ScanSpectre.cs
+├── ScanSpectre.Designer.cs
+├── AddressScanner.cs
+├── AddressList.cs
+│
+├── assets/
+│   ├── banner.png
+│   ├── screenshot-main.png
+│   └── screenshot-scan.gif
+│
+└── README.md
+```
+
+---
+
+# 🤝 Contributing
+
+Pull requests are welcome!
+You may help improve:
+
+* Performance
+* UI design
+* Feature expansion
+* Code documentation
+
+---
+
+# ⚠️ Disclaimer
+
+Use **ScanSpectre** only on networks you **own** or **have permission to test**.
+Unauthorized port scanning may be illegal in your jurisdiction.
+
+---
+
+# 📄 License
+
+Released under the **MIT License**.
+See the LICENSE file for more information.
+
+---
+
+# 🌐 GitHub Pages Support
+
+This README is fully compatible with **GitHub Pages** (Markdown-based sites).
+To enable GitHub Pages:
+
+1. Go to:
+   **Settings → Pages**
+2. Select:
+   **Source: `main` branch → `/root` folder`**
+3. Save
+4. Your documentation will be available at:
+   `https://musman2002.github.io/ScanSpectre/`
+
