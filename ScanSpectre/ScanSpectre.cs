@@ -1,69 +1,57 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 
 namespace ScanSpectre
 {
     public partial class ScanSpectre : Form
     {
-        private AddressScanner scanner;
-
         public ScanSpectre()
         {
             InitializeComponent();
-            txtIp.GotFocus += RemoveText;
-            txtIp.LostFocus += AddText;
         }
 
-        private void RemoveText(object sender, EventArgs e)
+        private void ScanSpectre_Load(object? sender, EventArgs e)
         {
-            if (txtIp.Text == "Enter IP/Domain")
+            cmbTheme.SelectedIndexChanged += (s, ev) =>
             {
-                txtIp.Text = "";
-            }
-        }
+                ThemeManager.CurrentTheme = (ThemeManager.AppTheme)cmbTheme.SelectedIndex;
+                ThemeManager.ApplyTheme(this);
+            };
 
-        private void AddText(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtIp.Text))
+            ThemeManager.ApplyTheme(this);
+
+            btnScan.Click += async (s, ev) =>
             {
-                txtIp.Text = "Enter IP/Domain";
-            }
-        }
+                gridResults.Rows.Clear();
 
-        private void btnStartScan_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Rows.Clear();
-            btnStartScan.Enabled = false;
+                string host = txtHost.Text;
+                int start = int.Parse(txtStart.Text);
+                int end = int.Parse(txtEnd.Text);
+                int timeout = int.Parse(txtTimeout.Text);
+                int threads = int.Parse(txtThreads.Text);
 
-            scanner = new AddressScanner(
-                txtIp.Text,
-                (int)txtStartPort.Value,
-                (int)txtEndPort.Value,
-                (int)txtTimeout.Value,
-                dataGridView1,
-                txtCurrentPort,
-                this,
-                btnStartScan);
+                var scanner = new AddressScanner(host, timeout, threads);
+                var range = new AddressList(start, end);
 
-            scanner.StartScan();
-        }
-
-        private void btnSaveToFile_Click(object sender, EventArgs e)
-        {
-            if (scanner == null)
-            {
-                MessageBox.Show("No scan results to save. Please run a scan first.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                scanner.OnResult += result =>
                 {
-                    scanner.SaveResultsToFile(saveFileDialog.FileName);
-                }
-            }
+                    Invoke(new Action(() =>
+                    {
+                        gridResults.Rows.Add(result.Port, result.Status);
+                    }));
+                };
+
+                scanner.OnCurrentPort += port =>
+                {
+                    Invoke(new Action(() =>
+                    {
+                        lblCurrentPort.Text = $"Current Port: {port}";
+                    }));
+                };
+
+                await scanner.StartAsync(range);
+                MessageBox.Show("Scan complete!", "Done");
+            };
         }
     }
 }
