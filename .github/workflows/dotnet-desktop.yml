@@ -52,17 +52,22 @@ jobs:
     # PUBLISH (x64 + ARM64)
     # ---------------------------
     - name: Publish Project (x64)
-      run: dotnet C:\publish ./ScanSpectre/ScanSpectre.csproj `
+      shell: pwsh
+      run: |
+        $publishDir = "publish/x64"
+        dotnet publish "./ScanSpectre/ScanSpectre.csproj" `
           --configuration Release `
-          --output publish/x64 `
+          --output $publishDir `
           --self-contained false `
           --runtime win-x64
-      shell: pwsh
 
     - name: Publish Project (ARM64)
-      run: dotnet publish ./ScanSpectre/ScanSpectre.csproj `
+      shell: pwsh
+      run: |
+        $publishDir = "publish/arm64"
+        dotnet publish "./ScanSpectre/ScanSpectre.csproj" `
           --configuration Release `
-          --output publish/arm64 `
+          --output $publishDir `
           --self-contained false `
           --runtime win-arm64
       shell: pwsh
