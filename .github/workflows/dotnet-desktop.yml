@@ -74,16 +74,17 @@ jobs:
     # CREATE ZIP RELEASE FILES
     # ---------------------------
     - name: Create ZIP archives
-      run: |
-        Compress-Archive -Path C:\publish/x64/* -DestinationPath C:\publish/ScanSpectre-x64.zip
-        Compress-Archive -Path C:\publish/arm64/* -DestinationPath C:\publish/ScanSpectre-arm64.zip
       shell: pwsh
+      run: |
+        Compress-Archive -Path "publish/x64/*" -DestinationPath "publish/ScanSpectre-x64.zip"
+        Compress-Archive -Path "publish/arm64/*" -DestinationPath "publish/ScanSpectre-arm64.zip"
 
     # ---------------------------
     # SEMVER VERSIONING
     # ---------------------------
     - name: Auto increment version
       id: version
+      shell: pwsh
       run: |
         $current = (git tag --sort=-v:refname | Select-Object -First 1)
         if (-not $current) { $current = "v1.0.0" }
@@ -95,7 +96,7 @@ jobs:
 
         $newVersion = "v$major.$minor.$patch"
         echo "VERSION=$newVersion" >> $env:GITHUB_ENV
-      shell: pwsh
+      
 
     # ---------------------------
     # GIT TAGGING
