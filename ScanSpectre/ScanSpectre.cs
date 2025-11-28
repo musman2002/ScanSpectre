@@ -12,7 +12,7 @@ namespace ScanSpectre
             InitializeComponent();
         }
 
-        private async void btnStart_Click(object sender, EventArgs e)
+        private async void BtnStart_Click(object sender, EventArgs e)
         {
             gridResults.Rows.Clear();
 
@@ -37,5 +37,17 @@ namespace ScanSpectre
                 gridResults.Rows.Add(result.Port, result.Status);
             }
         }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            settingsPanel.Visible = !settingsPanel.Visible;
+        }
+
+        private void ThemeToggle_CheckedChanged(object sender, EventArgs e)
+        {
+            ThemeManager.ToggleTheme(this);
+        }
+
+
     }
 }

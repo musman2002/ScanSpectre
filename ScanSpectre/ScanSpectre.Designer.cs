@@ -17,107 +17,207 @@
 
         private void InitializeComponent()
         {
-            this.topPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnSettings = new Guna.UI2.WinForms.Guna2Button();
-            this.settingsPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.themeToggle = new Guna.UI2.WinForms.Guna2ToggleSwitch();
-            this.themeLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.txtHost = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtStartPort = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtEndPort = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtTimeout = new Guna.UI2.WinForms.Guna2TextBox();
-            this.txtThreads = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnStart = new Guna.UI2.WinForms.Guna2Button();
-            this.gridResults = new System.Windows.Forms.DataGridView();
-
-            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).BeginInit();
-            this.SuspendLayout();
-
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            topPanel = new Guna.UI2.WinForms.Guna2Panel();
+            btnSettings = new Guna.UI2.WinForms.Guna2Button();
+            settingsPanel = new Guna.UI2.WinForms.Guna2Panel();
+            themeLabel = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            themeToggle = new Guna.UI2.WinForms.Guna2ToggleSwitch();
+            txtHost = new Guna.UI2.WinForms.Guna2TextBox();
+            txtStartPort = new Guna.UI2.WinForms.Guna2TextBox();
+            txtEndPort = new Guna.UI2.WinForms.Guna2TextBox();
+            txtTimeout = new Guna.UI2.WinForms.Guna2TextBox();
+            txtThreads = new Guna.UI2.WinForms.Guna2TextBox();
+            btnStart = new Guna.UI2.WinForms.Guna2Button();
+            gridResults = new DataGridView();
+            topPanel.SuspendLayout();
+            settingsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridResults).BeginInit();
+            SuspendLayout();
+            // 
             // topPanel
-            this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topPanel.Size = new System.Drawing.Size(900, 50);
-            this.topPanel.Controls.Add(this.btnSettings);
-
+            // 
+            topPanel.Controls.Add(btnSettings);
+            topPanel.CustomizableEdges = customizableEdges3;
+            topPanel.Dock = DockStyle.Top;
+            topPanel.Location = new Point(0, 0);
+            topPanel.Name = "topPanel";
+            topPanel.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            topPanel.Size = new Size(1000, 50);
+            topPanel.TabIndex = 8;
+            // 
             // btnSettings
-            this.btnSettings.Text = "⚙";
-            this.btnSettings.Size = new System.Drawing.Size(45, 45);
-            this.btnSettings.Location = new System.Drawing.Point(840, 3);
-            this.btnSettings.BorderRadius = 8;
-            this.btnSettings.Click += (s, e) => settingsPanel.Visible = !settingsPanel.Visible;
-
+            // 
+            btnSettings.BorderRadius = 8;
+            btnSettings.CustomizableEdges = customizableEdges1;
+            btnSettings.Font = new Font("Segoe UI", 9F);
+            btnSettings.ForeColor = Color.White;
+            btnSettings.Location = new Point(840, 3);
+            btnSettings.Name = "btnSettings";
+            btnSettings.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btnSettings.Size = new Size(45, 45);
+            btnSettings.TabIndex = 0;
+            btnSettings.Text = "⚙";
+            btnSettings.Click += BtnSettings_Click;
+            // 
             // settingsPanel
-            this.settingsPanel.Size = new System.Drawing.Size(200, 900);
-            this.settingsPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.settingsPanel.Visible = false;
-            this.settingsPanel.Controls.Add(this.themeLabel);
-            this.settingsPanel.Controls.Add(this.themeToggle);
-
+            // 
+            settingsPanel.Controls.Add(themeLabel);
+            settingsPanel.Controls.Add(themeToggle);
+            settingsPanel.CustomizableEdges = customizableEdges7;
+            settingsPanel.Dock = DockStyle.Left;
+            settingsPanel.Location = new Point(0, 50);
+            settingsPanel.Name = "settingsPanel";
+            settingsPanel.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            settingsPanel.Size = new Size(200, 600);
+            settingsPanel.TabIndex = 7;
+            settingsPanel.Visible = false;
+            // 
             // themeLabel
-            this.themeLabel.Text = "Dark Mode";
-            this.themeLabel.Location = new System.Drawing.Point(20, 40);
-
+            // 
+            themeLabel.BackColor = Color.Transparent;
+            themeLabel.Location = new Point(20, 40);
+            themeLabel.Name = "themeLabel";
+            themeLabel.Size = new Size(61, 17);
+            themeLabel.TabIndex = 0;
+            themeLabel.Text = "Dark Mode";
+            // 
             // themeToggle
-            this.themeToggle.Location = new System.Drawing.Point(120, 40);
-            this.themeToggle.CheckedChanged += (s, e) =>
-            {
-                ThemeManager.ToggleTheme(this);
-            };
-
+            // 
+            themeToggle.CustomizableEdges = customizableEdges5;
+            themeToggle.Location = new Point(120, 40);
+            themeToggle.Name = "themeToggle";
+            themeToggle.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            themeToggle.Size = new Size(35, 20);
+            themeToggle.TabIndex = 1;
+            themeToggle.CheckedChanged += ThemeToggle_CheckedChanged;
+            // 
             // txtHost
-            this.txtHost.PlaceholderText = "Host / Domain";
-            this.txtHost.Location = new System.Drawing.Point(220, 70);
-            this.txtHost.Width = 250;
-
+            // 
+            txtHost.CustomizableEdges = customizableEdges9;
+            txtHost.DefaultText = "";
+            txtHost.Font = new Font("Segoe UI", 9F);
+            txtHost.Location = new Point(220, 70);
+            txtHost.Name = "txtHost";
+            txtHost.PlaceholderText = "Host / Domain";
+            txtHost.SelectedText = "";
+            txtHost.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            txtHost.Size = new Size(250, 36);
+            txtHost.TabIndex = 6;
+            // 
             // txtStartPort
-            this.txtStartPort.PlaceholderText = "Start Port";
-            this.txtStartPort.Location = new System.Drawing.Point(480, 70);
-            this.txtStartPort.Width = 100;
-
+            // 
+            txtStartPort.CustomizableEdges = customizableEdges11;
+            txtStartPort.DefaultText = "";
+            txtStartPort.Font = new Font("Segoe UI", 9F);
+            txtStartPort.Location = new Point(480, 70);
+            txtStartPort.Name = "txtStartPort";
+            txtStartPort.PlaceholderText = "Start Port";
+            txtStartPort.SelectedText = "";
+            txtStartPort.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            txtStartPort.Size = new Size(100, 36);
+            txtStartPort.TabIndex = 5;
+            // 
             // txtEndPort
-            this.txtEndPort.PlaceholderText = "End Port";
-            this.txtEndPort.Location = new System.Drawing.Point(590, 70);
-            this.txtEndPort.Width = 100;
-
+            // 
+            txtEndPort.CustomizableEdges = customizableEdges13;
+            txtEndPort.DefaultText = "";
+            txtEndPort.Font = new Font("Segoe UI", 9F);
+            txtEndPort.Location = new Point(590, 70);
+            txtEndPort.Name = "txtEndPort";
+            txtEndPort.PlaceholderText = "End Port";
+            txtEndPort.SelectedText = "";
+            txtEndPort.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            txtEndPort.Size = new Size(100, 36);
+            txtEndPort.TabIndex = 4;
+            // 
             // txtTimeout
-            this.txtTimeout.PlaceholderText = "Timeout (ms)";
-            this.txtTimeout.Location = new System.Drawing.Point(700, 70);
-            this.txtTimeout.Width = 120;
-
+            // 
+            txtTimeout.CustomizableEdges = customizableEdges15;
+            txtTimeout.DefaultText = "";
+            txtTimeout.Font = new Font("Segoe UI", 9F);
+            txtTimeout.Location = new Point(700, 70);
+            txtTimeout.Name = "txtTimeout";
+            txtTimeout.PlaceholderText = "Timeout (ms)";
+            txtTimeout.SelectedText = "";
+            txtTimeout.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            txtTimeout.Size = new Size(120, 36);
+            txtTimeout.TabIndex = 3;
+            // 
             // txtThreads
-            this.txtThreads.PlaceholderText = "Threads";
-            this.txtThreads.Location = new System.Drawing.Point(830, 70);
-            this.txtThreads.Width = 100;
-
+            // 
+            txtThreads.CustomizableEdges = customizableEdges17;
+            txtThreads.DefaultText = "";
+            txtThreads.Font = new Font("Segoe UI", 9F);
+            txtThreads.Location = new Point(830, 70);
+            txtThreads.Name = "txtThreads";
+            txtThreads.PlaceholderText = "Threads";
+            txtThreads.SelectedText = "";
+            txtThreads.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            txtThreads.Size = new Size(100, 36);
+            txtThreads.TabIndex = 2;
+            // 
             // btnStart
-            this.btnStart.Text = "Start Scan";
-            this.btnStart.Location = new System.Drawing.Point(220, 120);
-            this.btnStart.Size = new System.Drawing.Size(150, 40);
-            this.btnStart.BorderRadius = 10;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-
+            // 
+            btnStart.BorderRadius = 10;
+            btnStart.CustomizableEdges = customizableEdges19;
+            btnStart.Font = new Font("Segoe UI", 9F);
+            btnStart.ForeColor = Color.White;
+            btnStart.Location = new Point(220, 120);
+            btnStart.Name = "btnStart";
+            btnStart.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            btnStart.Size = new Size(150, 40);
+            btnStart.TabIndex = 1;
+            btnStart.Text = "Start Scan";
+            btnStart.Click += BtnStart_Click;
+            // 
             // gridResults
-            this.gridResults.Location = new System.Drawing.Point(220, 180);
-            this.gridResults.Size = new System.Drawing.Size(710, 400);
-            this.gridResults.ReadOnly = true;
-            this.gridResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-
-            // Form
-            this.Controls.Add(this.gridResults);
-            this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.txtThreads);
-            this.Controls.Add(this.txtTimeout);
-            this.Controls.Add(this.txtEndPort);
-            this.Controls.Add(this.txtStartPort);
-            this.Controls.Add(this.txtHost);
-            this.Controls.Add(this.settingsPanel);
-            this.Controls.Add(this.topPanel);
-            this.Text = "ScanSpectre";
-            this.ClientSize = new System.Drawing.Size(1000, 650);
-
-            ThemeManager.ApplyTheme(this);
-
-            ((System.ComponentModel.ISupportInitialize)(this.gridResults)).EndInit();
-            this.ResumeLayout(false);
+            // 
+            gridResults.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridResults.Location = new Point(220, 180);
+            gridResults.Name = "gridResults";
+            gridResults.ReadOnly = true;
+            gridResults.Size = new Size(710, 400);
+            gridResults.TabIndex = 0;
+            // 
+            // ScanSpectre
+            // 
+            ClientSize = new Size(1000, 650);
+            Controls.Add(gridResults);
+            Controls.Add(btnStart);
+            Controls.Add(txtThreads);
+            Controls.Add(txtTimeout);
+            Controls.Add(txtEndPort);
+            Controls.Add(txtStartPort);
+            Controls.Add(txtHost);
+            Controls.Add(settingsPanel);
+            Controls.Add(topPanel);
+            Name = "ScanSpectre";
+            Text = "ScanSpectre";
+            topPanel.ResumeLayout(false);
+            settingsPanel.ResumeLayout(false);
+            settingsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridResults).EndInit();
+            ResumeLayout(false);
         }
     }
 }
