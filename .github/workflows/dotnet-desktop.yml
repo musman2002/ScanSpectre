@@ -11,35 +11,36 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Set up MSBuild
-      uses: microsoft/setup-msbuild@v1   
+      uses: microsoft/setup-msbuild@v1
 
     - name: Restore NuGet packages
-      run: nuget restore D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln
+      run: nuget restore ${{ github.workspace }}\ScanSpectre.slnx
 
     - name: Build solution
       run: |
-        $OutputDir = "C:\Publish"
+        $OutputDir = "${{ github.workspace }}\Publish"
         mkdir $OutputDir
-        msbuild /p:Configuration=Release D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln /p:OutputPath=$OutputDir
+        msbuild ${{ github.workspace }}\ScanSpectre.slnx /p:Configuration=Release /p:OutputPath=$OutputDir
 
-    - name: Create a ZIP archive of the published files
+    - name: Create ZIP archive
       run: |
-        Compress-Archive -Path C:\Publish\* -DestinationPath C:\Publish\release.zip
+        Compress-Archive -Path ${{ github.workspace }}\Publish\* -DestinationPath ${{ github.workspace }}\Publish\release.zip
         
     - name: Create Git tag
       id: set_tag
+      shell: bash
       run: |
-        $tag = "v$(date +'%Y%m%d%H%M%S')"
-        git tag $tag
-        git push origin $tag
-        echo "TAG=$tag" >> $env:GITHUB_ENV
+        tag="v$(date +'%Y%m%d%H%M%S')"
+        git tag "$tag"
+        git push origin "$tag"
+        echo "TAG=$tag" >> $GITHUB_ENV
 
     - name: Create release
       id: create_release
@@ -52,13 +53,12 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Update release asset
-      id: upload-release-asset
+    - name: Upload release asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: C:\Publish\release.zip
+        asset_path: ${{ github.workspace }}\Publish\release.zip
         asset_name: ScanSpectre.zip
         asset_content_type: application/zip
