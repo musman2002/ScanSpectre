@@ -30,7 +30,7 @@ jobs:
 
     - name: Publish Project
       run: |
-        $publishDir = "$(System.DefaultWorkingDirectory)\publish"
+        $publishDir = "C:\publish"
         dotnet publish ./ScanSpectre/ScanSpectre.csproj `
           --configuration Release `
           --output $publishDir `
