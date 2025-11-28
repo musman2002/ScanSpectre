@@ -54,10 +54,9 @@ jobs:
     - name: Publish Project (x64)
       shell: pwsh
       run: |
-        $publishDir = "publish/x64"
         dotnet publish "./ScanSpectre/ScanSpectre.csproj" `
           --configuration Release `
-          --output $publishDir `
+          --output "publish/x64" `
           --self-contained false `
           --runtime win-x64
 
@@ -70,7 +69,6 @@ jobs:
           --output $publishDir `
           --self-contained false `
           --runtime win-arm64
-      shell: pwsh
 
     # ---------------------------
     # CREATE ZIP RELEASE FILES
