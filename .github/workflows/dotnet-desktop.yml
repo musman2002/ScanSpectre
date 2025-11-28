@@ -1,4 +1,4 @@
-name: Build and Publish .NET Framework 4.8 Release
+name: Build and Publish ScanSpectre (.NET 10 Release)
 
 permissions:
   contents: write
@@ -14,51 +14,61 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Set up MSBuild
-      uses: microsoft/setup-msbuild@v1   
+    - name: Setup .NET 10 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '10.0.x'
 
-    - name: Restore NuGet packages
-      run: nuget restore D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln
+    - name: Restore dependencies
+      run: dotnet restore ./ScanSpectre.sln
 
-    - name: Build solution
+    - name: Build (Release)
+      run: dotnet build ./ScanSpectre.sln --configuration Release --no-restore
+
+    - name: Publish Project
       run: |
-        $OutputDir = "C:\Publish"
-        mkdir $OutputDir
-        msbuild /p:Configuration=Release D:\a\ScanSpectre\ScanSpectre\ScanSpectre.sln /p:OutputPath=$OutputDir
+        $publishDir = "$(System.DefaultWorkingDirectory)\publish"
+        dotnet publish ./ScanSpectre/ScanSpectre.csproj `
+          --configuration Release `
+          --output $publishDir `
+          --self-contained false `
+          --runtime win-x64
+      shell: pwsh
 
-    - name: Create a ZIP archive of the published files
+    - name: Create Release ZIP
       run: |
-        Compress-Archive -Path C:\Publish\* -DestinationPath C:\Publish\release.zip
-        
-    - name: Create Git tag
-      id: set_tag
+        Compress-Archive -Path publish\* -DestinationPath publish\ScanSpectre.zip
+      shell: pwsh
+
+    # ----------------------------
+    #        GIT TAGGING
+    # ----------------------------
+
+    - name: Create Git Tag
+      id: tag_step
+      shell: pwsh
       run: |
-        $tag = "v$(date +'%Y%m%d%H%M%S')"
+        $tag = "v" + (Get-Date -Format "yyyy.MM.dd.HHmmss")
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
         git tag $tag
         git push origin $tag
         echo "TAG=$tag" >> $env:GITHUB_ENV
 
-    - name: Create release
+    # ----------------------------
+    #        CREATE RELEASE
+    # ----------------------------
+
+    - name: Create GitHub Release
       id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: ncipollo/release-action@v1
       with:
-        tag_name: ${{ env.TAG }}
-        release_name: Release ${{ env.TAG }}
+        tag: ${{ env.TAG }}
+        name: "ScanSpectre Release ${{ env.TAG }}"
         draft: false
         prerelease: false
-
-    - name: Update release asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: C:\Publish\release.zip
-        asset_name: ScanSpectre.zip
-        asset_content_type: application/zip
+        artifacts: "publish/ScanSpectre.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
