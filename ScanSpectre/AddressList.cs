@@ -4,19 +4,21 @@ namespace ScanSpectre
 {
     public class AddressList
     {
-        public int StartPort { get; }
-        public int EndPort { get; }
+        public int StartPort { get; set; }
+        public int EndPort { get; set; }
 
-        public AddressList(int start, int end)
-        {
-            StartPort = start;
-            EndPort = end;
-        }
-
-        public IEnumerable<int> Ports()
+        public IEnumerable<int> GetPorts()
         {
             for (int p = StartPort; p <= EndPort; p++)
+            {
                 yield return p;
+            }
         }
+
+        public bool IsValidRange() =>
+            StartPort > 0 &&
+            EndPort > 0 &&
+            EndPort >= StartPort &&
+            EndPort <= 65535;
     }
 }

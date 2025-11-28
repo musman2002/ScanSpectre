@@ -9,7 +9,7 @@ namespace ScanSpectre
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new ScanSpectreForm());
+            Application.Run(new ScanSpectre());
         }
     }
 }

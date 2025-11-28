@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScanSpectre
@@ -10,48 +12,30 @@ namespace ScanSpectre
             InitializeComponent();
         }
 
-        private void ScanSpectre_Load(object? sender, EventArgs e)
+        private async void btnStart_Click(object sender, EventArgs e)
         {
-            cmbTheme.SelectedIndexChanged += (s, ev) =>
+            gridResults.Rows.Clear();
+
+            string host = txtHost.Text.Trim();
+            int start = int.Parse(txtStartPort.Text);
+            int end = int.Parse(txtEndPort.Text);
+            int timeout = int.Parse(txtTimeout.Text);
+            int threads = int.Parse(txtThreads.Text);
+
+            AddressList list = new() { StartPort = start, EndPort = end };
+            if (!list.IsValidRange())
             {
-                ThemeManager.CurrentTheme = (ThemeManager.AppTheme)cmbTheme.SelectedIndex;
-                ThemeManager.ApplyTheme(this);
-            };
+                MessageBox.Show("Invalid port range.");
+                return;
+            }
 
-            ThemeManager.ApplyTheme(this);
+            AddressScanner scanner = new(host, timeout, threads);
 
-            btnScan.Click += async (s, ev) =>
+            foreach (var port in list.GetPorts())
             {
-                gridResults.Rows.Clear();
-
-                string host = txtHost.Text;
-                int start = int.Parse(txtStart.Text);
-                int end = int.Parse(txtEnd.Text);
-                int timeout = int.Parse(txtTimeout.Text);
-                int threads = int.Parse(txtThreads.Text);
-
-                var scanner = new AddressScanner(host, timeout, threads);
-                var range = new AddressList(start, end);
-
-                scanner.OnResult += result =>
-                {
-                    Invoke(new Action(() =>
-                    {
-                        gridResults.Rows.Add(result.Port, result.Status);
-                    }));
-                };
-
-                scanner.OnCurrentPort += port =>
-                {
-                    Invoke(new Action(() =>
-                    {
-                        lblCurrentPort.Text = $"Current Port: {port}";
-                    }));
-                };
-
-                await scanner.StartAsync(range);
-                MessageBox.Show("Scan complete!", "Done");
-            };
+                var result = await scanner.ScanPortAsync(port);
+                gridResults.Rows.Add(result.Port, result.Status);
+            }
         }
     }
 }
