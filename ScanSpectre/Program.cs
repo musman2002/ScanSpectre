@@ -11,9 +11,7 @@ namespace ScanSpectre
             ApplicationConfiguration.Initialize();
 
             using (var splash = new SplashScreen())
-            {
                 splash.ShowDialog();
-            }
 
             Application.Run(new ScanSpectre());
         }
