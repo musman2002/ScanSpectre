@@ -21,13 +21,13 @@ jobs:
       uses: microsoft/setup-msbuild@v1
 
     - name: Restore NuGet packages
-      run: nuget restore ${{ github.workspace }}\ScanSpectre\ScanSpectre.slnx
+      run: nuget restore D:\a\ScanSpectre\ScanSpectre\ScanSpectre.slnx
 
     - name: Build solution
       run: |
         $OutputDir = "${{ github.workspace }}\Publish"
         mkdir $OutputDir
-        msbuild ${{ github.workspace }}\ScanSpectre\ScanSpectre.slnx /p:Configuration=Release /p:OutputPath=$OutputDir
+        msbuild D:\a\ScanSpectre\ScanSpectre\ScanSpectre.slnx /p:Configuration=Release /p:OutputPath=$OutputDir
 
     - name: Create ZIP archive
       run: |
