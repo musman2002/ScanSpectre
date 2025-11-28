@@ -86,16 +86,34 @@ jobs:
       id: version
       shell: pwsh
       run: |
-        $current = (git tag --sort=-v:refname | Select-Object -First 1)
-        if (-not $current) { $current = "v1.0.0" }
+        # Read latest tag
+        $latestTag = (git tag --sort=-v:refname | Select-Object -First 1)
 
-        $parts = $current.TrimStart("v").Split(".")
-        $major = [int]$parts[0]
-        $minor = [int]$parts[1]
-        $patch = [int]$parts[2] + 1
+        # Fallback to v1.0.0 if no tags exist
+        if (-not $latestTag) {
+            $newVersion = "v1.0.0"
+        }
+        else {
+            # Remove "v" prefix
+            $tag = $latestTag.TrimStart("v")
 
-        $newVersion = "v$major.$minor.$patch"
+            # If tag is NOT in x.y.z format, reset to v1.0.0
+            if ($tag -notmatch '^\d+\.\d+\.\d+$') {
+                $newVersion = "v1.0.0"
+            }
+            else {
+                # Semantic versioning split
+                $parts = $tag.Split(".")
+                $major = [int]$parts[0]
+                $minor = [int]$parts[1]
+                $patch = [int]$parts[2] + 1
+
+                $newVersion = "v$major.$minor.$patch"
+            }
+        }
+
         echo "VERSION=$newVersion" >> $env:GITHUB_ENV
+        Write-Host "VERSION=$newVersion"
       
 
     # ---------------------------
