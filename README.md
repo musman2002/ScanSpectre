@@ -37,8 +37,7 @@
 * [Screenshots](#-screenshots)
 * [Installation](#-installation)
 * [Usage](#-usage)
-* [Documentation](#-documentation)
-* [Project Structure](#-project-structure)
+* [Project Roadmap](/docs/roadmap.md)
 * [Contributing](#-contributing)
 * [Disclaimer](#-disclaimer)
 * [License](#-license)
@@ -125,57 +124,6 @@ Supports **Windows 11 / Windows 12** and **.NET 10 Desktop Runtime**.
 
 Real-time updates appear in the grid, and the **Current Port** indicator shows the active check.
 
----
-
-# 📘 Documentation
-
-This section auto-generates structure and descriptions to help developers.
-
-## 🔧 Core Classes
-
-### **AddressScanner.cs**
-
-Handles:
-
-* TCP connect attempts
-* Timeout logic
-* Multi-threaded scanning
-* Reporting results back to the UI
-
-### **AddressList.cs**
-
-Models port ranges and
-
-* Generates port sequences
-* Validates ranges
-* Prepares values for scanning
-
-### **ScanSpectre.cs**
-
-* UI event handlers
-* Updates DataGridView
-* Controls thread management
-* Coordinates scanner operations
-
----
-
-# 🧩 Project Structure
-
-```
-ScanSpectre/
-│
-├── ScanSpectre.cs
-├── ScanSpectre.Designer.cs
-├── AddressScanner.cs
-├── AddressList.cs
-│
-├── assets/
-│   ├── banner.png
-│   ├── screenshot-main.png
-│   └── screenshot-scan.gif
-│
-└── README.md
-```
 
 ---
 
