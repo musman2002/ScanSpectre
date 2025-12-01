@@ -43,7 +43,6 @@ namespace ScanSpectre
             this.Close();
         }
 
-        // Fade In
         private async Task FadeInAsync()
         {
             for (double op = 0.0; op <= 1.0; op += 0.04)
@@ -53,7 +52,6 @@ namespace ScanSpectre
             }
         }
 
-        // Fade Out
         private async Task FadeOutAsync()
         {
             for (double op = 1.0; op >= 0; op -= 0.04)
@@ -63,7 +61,6 @@ namespace ScanSpectre
             }
         }
 
-        // Logo pulse animation
         private async void AnimateLogo()
         {
             while (this.Visible)
@@ -93,7 +90,6 @@ namespace ScanSpectre
             }
         }
 
-        // Typing animation
         private async void AnimateLoadingText()
         {
             string baseText = "Loading";
@@ -107,7 +103,6 @@ namespace ScanSpectre
             }
         }
 
-        // Progress simulation
         private async void SimulateProgress()
         {
             for (int i = 0; i <= 100; i++)

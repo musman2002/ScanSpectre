@@ -1,4 +1,7 @@
-﻿namespace ScanSpectre
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace ScanSpectre
 {
     partial class SplashScreen
     {
@@ -27,33 +30,33 @@
             this.shadow.TargetForm = this;
 
             // SplashScreen
-            this.BackColor = System.Drawing.Color.FromArgb(20, 20, 25);
-            this.ClientSize = new System.Drawing.Size(420, 300);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.BackColor = Color.FromArgb(20, 20, 25);
+            this.ClientSize = new Size(420, 300);
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.DoubleBuffered = true;
             this.Opacity = 0.05;
 
             // logo
-            this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.logo.Location = new System.Drawing.Point(110, 40);
-            this.logo.Size = new System.Drawing.Size(200, 140);
-            this.logo.BackColor = System.Drawing.Color.Transparent;
+            this.logo.SizeMode = PictureBoxSizeMode.Zoom;
+            this.logo.Location = new Point(110, 40);
+            this.logo.Size = new Size(200, 140);
+            this.logo.BackColor = Color.Transparent;
 
             // progressBar
-            this.progressBar.Location = new System.Drawing.Point(60, 220);
-            this.progressBar.Size = new System.Drawing.Size(300, 12);
-            this.progressBar.FillColor = System.Drawing.Color.FromArgb(60, 60, 70);
-            this.progressBar.ProgressColor = System.Drawing.Color.DeepSkyBlue;
-            this.progressBar.ProgressColor2 = System.Drawing.Color.MediumSlateBlue;
+            this.progressBar.Location = new Point(60, 220);
+            this.progressBar.Size = new Size(300, 12);
+            this.progressBar.FillColor = Color.FromArgb(60, 60, 70);
+            this.progressBar.ProgressColor = Color.DeepSkyBlue;
+            this.progressBar.ProgressColor2 = Color.MediumSlateBlue;
             this.progressBar.BorderRadius = 6;
 
             // loadingText
             this.loadingText.Text = "Loading";
-            this.loadingText.ForeColor = System.Drawing.Color.White;
-            this.loadingText.Font = new System.Drawing.Font("Segoe UI Semibold", 12);
-            this.loadingText.BackColor = System.Drawing.Color.Transparent;
-            this.loadingText.Location = new System.Drawing.Point(175, 255);
+            this.loadingText.ForeColor = Color.White;
+            this.loadingText.Font = new Font("Segoe UI Semibold", 12);
+            this.loadingText.BackColor = Color.Transparent;
+            this.loadingText.Location = new Point(175, 255);
 
             this.Controls.Add(this.logo);
             this.Controls.Add(this.progressBar);

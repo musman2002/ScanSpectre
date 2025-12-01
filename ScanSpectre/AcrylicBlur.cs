@@ -34,7 +34,7 @@ namespace ScanSpectre
             {
                 AccentState = ACCENT_ENABLE_ACRYLICBLURBEHIND,
                 AccentFlags = 2,
-                GradientColor = unchecked((int)0xCC1A1A1A) // transparent dark blur
+                GradientColor = unchecked((int)0xCC1A1A1A)
             };
 
             IntPtr accentPtr = Marshal.AllocHGlobal(Marshal.SizeOf(accent));

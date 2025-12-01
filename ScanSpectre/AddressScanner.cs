@@ -19,7 +19,7 @@ namespace ScanSpectre
 
         public async Task<ScanResult> ScanPortAsync(int port)
         {
-            await _threadLimiter.WaitAsync();
+            await _threadLimiter.WaitAsync().ConfigureAwait(false);
 
             try
             {
@@ -27,7 +27,7 @@ namespace ScanSpectre
                 var connectTask = client.ConnectAsync(_host, port);
                 var timeoutTask = Task.Delay(_timeout);
 
-                var completed = await Task.WhenAny(connectTask, timeoutTask);
+                var completed = await Task.WhenAny(connectTask, timeoutTask).ConfigureAwait(false);
 
                 return new ScanResult
                 {

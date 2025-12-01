@@ -15,6 +15,8 @@ namespace ScanSpectre
                 ApplyLight(root);
             else
                 ApplyDark(root);
+
+            root.Refresh();
         }
 
         public static void ToggleTheme(Control root)
@@ -50,10 +52,14 @@ namespace ScanSpectre
                     dgv.DefaultCellStyle.BackColor = Color.White;
                     dgv.DefaultCellStyle.ForeColor = Color.Black;
                     dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+                    dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
                 }
 
                 if (c is Label lbl)
                     lbl.ForeColor = Color.Black;
+
+                if (c is Guna2HtmlLabel html)
+                    html.ForeColor = Color.Black;
 
                 ApplyLight(c);
             }
@@ -91,6 +97,9 @@ namespace ScanSpectre
 
                 if (c is Label lbl)
                     lbl.ForeColor = Color.White;
+
+                if (c is Guna2HtmlLabel html)
+                    html.ForeColor = Color.White;
 
                 ApplyDark(c);
             }
